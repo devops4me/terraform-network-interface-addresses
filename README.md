@@ -1,5 +1,5 @@
 
-#### This module reads elastic network interfaces (ENIs) with an Amazon cloud VPC and returns a list of their private IP addresses using Python's AWS Rest API.
+#### This module reads elastic network interfaces (ENIs) within an Amazon VPC and returns their private IP addresses using Python's AWS Rest API.
 
 ---
 
@@ -54,3 +54,16 @@ The owner id is the 12 digit account id when you are interested in the EC2 insta
 If using a cloud service like a **RDS database cluster** or **AWS ElasticSearch** the owner id will translate as **`amazon-rds`** and **`amazon-elasticsearch`** respectively.
 
 ---
+
+## python | eni private ip addresses
+
+This snippet from **[eni-addresses.py](eni-addresses.py)** demonstrates the loop which reads every subnet in a VPC and then every network interface within them.
+
+```python
+for this_subnet in boto3.resource('ec2').Vpc( sys.argv[1] ).subnets.all():
+    for this_network_interface in this_subnet.network_interfaces.all():
+        if ( (this_network_interface.status == ENI_STATUS ) and ( this_network_interface.requester_id == sys.argv[2] ) ):
+            ip_addresses_list.append( this_network_interface.private_ip_address )
+```
+
+The script will push debugging information into a log file called *eni-addresses.log*.

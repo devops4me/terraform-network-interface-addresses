@@ -35,7 +35,7 @@
 
 import boto3, json, sys, logging
 
-logging.basicConfig( filename = 'eni-addresses-script.log', level = logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%Y%m%d %I:%M:%S %p' )
+logging.basicConfig( filename = 'eni-addresses.log', level = logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%Y%m%d %I:%M:%S %p' )
 
 logging.info( 'The eni-addresses script has been invoked.' )
 logging.info( 'The VPC ID received is [%s] and the eni owner name is [%s]' % ( sys.argv[1], sys.argv[2] ) )
