@@ -47,9 +47,9 @@ SEPARATOR_STRING = ","
 ip_addresses_list = []
 
 for this_subnet in boto3.resource('ec2').Vpc( sys.argv[1] ).subnets.all():
-    for this_network_interface in this_subnet.network_interfaces.all():
-        if ( (this_network_interface.status == ENI_STATUS ) and ( this_network_interface.requester_id == sys.argv[2] ) ):
-            ip_addresses_list.append( this_network_interface.private_ip_address )
+    for eni in this_subnet.network_interfaces.all():
+        if ( (eni.status == ENI_STATUS ) and ( eni.requester_id == sys.argv[2] ) ):
+            ip_addresses_list.append( eni.private_ip_address )
 
 ip_addresses_str = SEPARATOR_STRING.join( ip_addresses_list )
 print json.dumps( { OUTPUT_VARIABLE_NAME : ip_addresses_str } )
