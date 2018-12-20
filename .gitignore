@@ -11,3 +11,6 @@
 
 # When terraform crashes it can leave this file behind.
 crash.log
+
+# Ignore Rest API log of communications with the AWS Cloud
+eni-addresses.log

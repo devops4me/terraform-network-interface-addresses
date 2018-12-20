@@ -15,5 +15,5 @@
 */
 data external eni-ips
 {
-    program = [ "python", "${path.module}/eni-addresses.py", "${var.in_vpc_id}", "${var.in_owner_id}", "${var.in_endpoint}" ]
+    program = [ "python", "${path.module}/eni-addresses.py", "${var.in_vpc_id}", "${var.in_owner_id}" ]
 }

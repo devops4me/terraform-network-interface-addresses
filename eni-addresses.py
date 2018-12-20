@@ -18,17 +18,17 @@
 #          or as environment variables
 #          or in other alternative ways
 
-#  [3] - you can run this script using either of these commands
+#  [4] - you can run this script using either of these commands
 #          $ python eni-addresses.py
 #          $ ./eni-addresses.py
 
-#  [4] - an invalid syntax error "json.dumps" occurs if python3 used
+#  [5] - an invalid syntax error "json.dumps" occurs if python3 used
 
-#  [5] - it expects the VPC ID (string) in the first parameter
+#  [6] - it expects the VPC ID (string) in the first parameter
 
-#  [6] - it expects requester id (attachment owner) in 2nd parameter
+#  [7] - it expects requester id (attachment owner) in 2nd parameter
 
-#  [7] - output is JSON formatted CSV string with key "ip_addresses"
+#  [8] - output is JSON formatted CSV string with key "ip_addresses"
 
 # Example Output
 # {"ip_addresses": "10.42.1.230,10.42.1.39,10.42.1.139,10.42.0.108"}
@@ -39,7 +39,6 @@ logging.basicConfig( filename = 'eni-addresses.log', level = logging.DEBUG, form
 
 logging.info( 'The eni-addresses script has been invoked.' )
 logging.info( 'The VPC ID received is [%s] and the eni owner name is [%s]' % ( sys.argv[1], sys.argv[2] ) )
-logging.info( 'The url endpoint parameter is ~~ [%s] ~~' % sys.argv[3] )
 
 OUTPUT_VARIABLE_NAME = "ip_addresses"
 ENI_STATUS = "in-use"

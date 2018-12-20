@@ -24,11 +24,12 @@ variable in_owner_id
 }
 
 
-### ######################## ###
-### [[variable]] in_endpoint ###
-### ######################## ###
+### ################################# ###
+### [[variable]] in_dependency_holder ###
+### ################################# ###
 
-variable in_endpoint
+variable in_dependency_holder
 {
-    description = "The endpoint of the network interface owner."
+    description = "Pass something here to prevent this module starting before another finishes."
+    default = ""
 }
