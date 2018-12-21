@@ -12,8 +12,23 @@
  | --    b) "amazon-rds" for RDS clustered database nodes
  | --    c) "amazon-elasticsearch" for es domain nodes
  | --
+ | -- Without the dependency holder Terraform runs this
+ | -- script as soon as it knows the VPC ID which almost
+ | -- always is at the very beginning.
+ | --
+ | -- Passing in the dependency holder makes Terraform
+ | -- hold up and wait until dependent services have
+ | -- been instantiated.
+ | --
 */
 data external eni-ips
 {
-    program = [ "python", "${path.module}/eni-addresses.py", "${var.in_vpc_id}", "${var.in_owner_id}" ]
+    program =
+    [
+        "python",
+        "${path.module}/eni-addresses.py",
+        "${var.in_vpc_id}",
+        "${var.in_owner_id}",
+        "${var.in_dependency_holder}"
+    ]
 }
