@@ -48,6 +48,7 @@ ip_addresses_list = []
 
 for this_subnet in boto3.resource('ec2').Vpc( sys.argv[1] ).subnets.all():
     for eni in this_subnet.network_interfaces.all():
+        logging.info( 'This network interface status is %s and requester is %s' % ( eni.status, eni.requester_id ) )
         if ( (eni.status == ENI_STATUS ) and ( eni.requester_id == sys.argv[2] ) ):
             ip_addresses_list.append( eni.private_ip_address )
 
