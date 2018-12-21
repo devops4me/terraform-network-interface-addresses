@@ -94,3 +94,30 @@ This snippet from the ***`eni-addresses.log`*** illustrates the XML traffic gene
     </networkInterfaceSet>
 </DescribeNetworkInterfacesResponse>
 ```
+
+## eni-addresses.py | run manually
+
+When troubleshooting it pays to be able to run this script manually. Let's pretend our **`VPC ID`** is *vpc-54bab24bc1cb8789c* and the AWS elasticsearch service is responsible for creating the nodes - hence an owner ID of **`amazon-elasticsearch`**.
+
+    u@devops4me$ export AWS_ACCESS_KEY_ID=<access-key-characters>
+    u@devops4me$ export AWS_SECRET_ACCESS_KEY=<secret-key-characters>
+    u@devops4me$ export AWS_REGION=<eg eu-west-1>
+    u@devops4me$ export AWS_DEFAULT_REGION=<eg eu-west-1>
+    u@devops4me$ chmod u+x eni-addresses.py
+    u@devops4me$ ./eni-addresses.py "vpc-54bab24bc1cb8789c" "amazon-elasticsearch"
+
+### json | eni private ip addresses
+
+Terraform expects JSON to be returned with a key labelled **`ip_addresses`** like this assuming 4 nodes.
+
+``` json
+{
+  "ip_addresses": "10.99.20.240,10.99.20.247,10.99.11.11,10.99.3.167"
+}
+```
+
+### NoRegionError | You must specify a region
+
+Python's **botocore** will insist that you set the AWS_DEFAULT_REGION environment variable by throwing a **`NoRegionError`**.
+
+***`botocore.exceptions.NoRegionError: You must specify a region.`***

@@ -28,7 +28,9 @@
 
 #  [7] - it expects requester id (attachment owner) in 2nd parameter
 
-#  [8] - output is JSON formatted CSV string with key "ip_addresses"
+#  [8] - it expects a dependency hook string to be provided (and is logged).
+
+#  [9] - output is JSON formatted CSV string with key "ip_addresses"
 
 # Example Output
 # {"ip_addresses": "10.42.1.230,10.42.1.39,10.42.1.139,10.42.0.108"}
@@ -38,7 +40,9 @@ import boto3, json, sys, logging
 logging.basicConfig( filename = 'eni-addresses.log', level = logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%Y%m%d %I:%M:%S %p' )
 
 logging.info( 'The eni-addresses script has been invoked.' )
-logging.info( 'The VPC ID received is [%s] and the eni owner name is [%s]' % ( sys.argv[1], sys.argv[2] ) )
+logging.info( 'The VPC ID filter is [ %s ].' % ( sys.argv[1] ) )
+logging.info( 'The ENI owner name filter is [ %s ].' % ( sys.argv[2] ) )
+logging.info( 'The dependency hook is [ %s ].' % ( sys.argv[3] ) )
 
 OUTPUT_VARIABLE_NAME = "ip_addresses"
 ENI_STATUS = "in-use"
